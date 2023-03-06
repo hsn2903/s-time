@@ -6,8 +6,14 @@ import React from "react";
 const TimerMainPage = () => {
   return (
     <Layout>
-      <PomodoroTimer />
-      <Todo />
+      <div className="grid grid-cols-1 lg:grid-cols-2 py-24">
+        <div className="flex items-center justify-center">
+          <PomodoroTimer />
+        </div>
+        <div className="flex items-center justify-center">
+          <Todo />
+        </div>
+      </div>
     </Layout>
   );
 };

@@ -48,7 +48,7 @@ function Todo() {
   };
 
   return (
-    <div className="my-24">
+    <div className="">
       <div className="max-w-md mx-auto pt-8 px-4">
         <h1 className="text-2xl font-bold mb-4 text-gray-700">Tasks</h1>
         <div className="flex mb-4">

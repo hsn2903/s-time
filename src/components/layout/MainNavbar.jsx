@@ -1,6 +1,13 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { IoCloseOutline, IoMenuOutline } from "react-icons/io5";
+import Logo from "./Logo";
+
+const links = [
+  { id: 1, text: "Home", url: "/" },
+  { id: 2, text: "About", url: "/about" },
+  { id: 2, text: "Sign In", url: "/auth/login" },
+];
 
 const MainNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,8 +16,10 @@ const MainNavbar = () => {
     <div className="shadow-md relative">
       <div className="h-20 flex items-center justify-between container mx-auto">
         {/* nav header */}
-        <div className="flex items-center justify-between h-full">
-          <div className="text-2xl text-indigo-900 font-bold">s-time</div>
+        <div className="flex items-center justify-between h-full w-full">
+          <Link href="/">
+            <Logo />
+          </Link>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="inline-block sm:hidden"
@@ -35,6 +44,11 @@ const MainNavbar = () => {
                 Timer
               </Link>
             </li>
+            <li>
+              <Link href="/auth/login" className="font-medium text-gray-700">
+                Login
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -53,6 +67,12 @@ const MainNavbar = () => {
             <li>
               <Link href="/timer" className="text-xl font-medium text-gray-700">
                 Timer
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/auth/login" className="font-medium text-gray-700">
+                Login
               </Link>
             </li>
           </ul>

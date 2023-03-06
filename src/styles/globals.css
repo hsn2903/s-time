@@ -12,3 +12,12 @@ body {
   @apply bg-gray-100;
   color: #333;
 }
+
+.gradient-1 {
+  background: linear-gradient(
+    109.6deg,
+    rgb(251, 250, 225) 11.2%,
+    rgb(206, 240, 185) 47.5%,
+    rgb(100, 163, 111) 100.2%
+  );
+}
