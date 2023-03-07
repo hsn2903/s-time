@@ -7,12 +7,12 @@ const FormInput = ({ labelText, name, value, handleChange, ...rest }) => {
         {labelText}
       </label>
       <input
-        type="text"
         value={value}
         id={name}
         name={name}
         onChange={handleChange}
         className="px-4 py-2 bg-gray-200 rounded-md"
+        {...rest}
       />
     </div>
   );

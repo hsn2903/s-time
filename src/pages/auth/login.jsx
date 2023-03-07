@@ -1,26 +1,22 @@
+import Button from "@/components/ui/buttons/Button";
 import FormInput from "@/components/ui/inputs/FormInput";
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
+  signInAuthUserWithEmailAndPassword,
 } from "@/utils/firebase";
+import Link from "next/link";
 import { useState } from "react";
-import {
-  IoAlertCircleOutline,
-  IoAlertOutline,
-  IoLogoGoogle,
-  IoWarningOutline,
-} from "react-icons/io5";
+import { IoAlertOutline, IoLogoGoogle } from "react-icons/io5";
 
 const initialFormFields = {
-  username: "",
   email: "",
   password: "",
-  confirmPassword: "",
 };
 
 const LoginPage = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
-  const { username, email, password, confirmPassword } = formFields;
+  const { email, password } = formFields;
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -28,19 +24,19 @@ const LoginPage = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const logGoogleUser = async () => {
+  const resetFormFields = () => {
+    setFormFields(initialFormFields);
+  };
+
+  const signInWithGoogle = async () => {
     // log user in
     const { user } = await signInWithGooglePopup();
     // save user
-    createUserDocumentFromAuth(user);
+    await createUserDocumentFromAuth(user);
   };
 
   const validate = () => {
     const errors = {};
-
-    if (!username) {
-      errors.username = "Username is required";
-    }
 
     if (!email) {
       errors.email = "Email is required";
@@ -54,22 +50,36 @@ const LoginPage = () => {
       errors.password = "Password must be at least 6 characters";
     }
 
-    if (!confirmPassword) {
-      errors.confirmPassword = "Confirm Password is required";
-    } else if (password !== confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
-    }
-
     return errors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validate();
 
     if (Object.keys(errors).length === 0) {
-      console.log("Form submitted:", { username, email, password });
+      console.log("Form submitted:", { email, password });
       // Here you would typically make an API call to register the user
+
+      try {
+        const response = await signInAuthUserWithEmailAndPassword(
+          email,
+          password
+        );
+        console.log(response);
+        resetFormFields();
+      } catch (error) {
+        switch (error.code) {
+          case "auth/wrong-password":
+            alert("incorrect password for email");
+            break;
+          case "auth/user-not-found":
+            alert("no user associated with this email");
+            break;
+          default:
+            console.log(error);
+        }
+      }
     } else {
       setErrors(errors);
     }
@@ -111,20 +121,20 @@ const LoginPage = () => {
             </div>
           </div>
 
+          <div className="flex items-center gap-6 px-6 text-sm font-medium -mt-6">
+            <p className="text-gray-500">Don&apos;t have account?</p>
+            <Link href="/auth/register" className="text-blue-600">
+              Register
+            </Link>
+          </div>
+
           <div className="flex items-center justify-center gap-4 my-4 px-6">
-            <button
-              type="submit"
-              className="bg-indigo-900 text-white px-4 py-2 rounded-md"
-            >
+            <Button type="submit" buttonType="primary">
               Login
-            </button>
-            <button
-              type="button"
-              className="px-4 py-2 rounded-md border border-blue-400 hover:border-blue-700"
-              onClick={logGoogleUser}
-            >
+            </Button>
+            <Button type="button" buttonType="white" onClick={signInWithGoogle}>
               <IoLogoGoogle size={24} />
-            </button>
+            </Button>
           </div>
         </form>
       </div>

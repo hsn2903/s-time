@@ -1,18 +1,14 @@
 import FormInput from "@/components/ui/inputs/FormInput";
 import {
-  signInWithGooglePopup,
+  createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "@/utils/firebase";
+import Link from "next/link";
 import { useState } from "react";
-import {
-  IoAlertCircleOutline,
-  IoAlertOutline,
-  IoLogoGoogle,
-  IoWarningOutline,
-} from "react-icons/io5";
+import { IoAlertOutline } from "react-icons/io5";
 
 const initialFormFields = {
-  username: "",
+  displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -20,7 +16,7 @@ const initialFormFields = {
 
 const RegisterPage = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
-  const { username, email, password, confirmPassword } = formFields;
+  const { displayName, email, password, confirmPassword } = formFields;
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -28,11 +24,15 @@ const RegisterPage = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  const resetFormFields = () => {
+    setFormFields(initialFormFields);
+  };
+
   const validate = () => {
     const errors = {};
 
-    if (!username) {
-      errors.username = "Username is required";
+    if (!displayName) {
+      errors.displayName = "displayName is required";
     }
 
     if (!email) {
@@ -56,13 +56,29 @@ const RegisterPage = () => {
     return errors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validate();
 
     if (Object.keys(errors).length === 0) {
-      console.log("Form submitted:", { username, email, password });
+      console.log("Form submitted:", { displayName, email, password });
       // Here you would typically make an API call to register the user
+
+      try {
+        const { user } = await createAuthUserWithEmailAndPassword(
+          email,
+          password
+        );
+
+        await createUserDocumentFromAuth(user, { displayName });
+        resetFormFields();
+      } catch (error) {
+        if (error.code === "auth/email-already-in-use") {
+          alert("Cannot create user. Email already exist");
+        }
+
+        console.log("user creation encountered an error", error);
+      }
     } else {
       setErrors(errors);
     }
@@ -77,20 +93,22 @@ const RegisterPage = () => {
           <div className="flex flex-col gap-4 mb-4 p-6">
             <div className="flex flex-col">
               <FormInput
+                type="text"
                 labelText="User Name"
-                name="username"
-                value={username}
+                name="displayName"
+                value={displayName}
                 handleChange={handleChange}
               />
-              {errors.username && (
+              {errors.displayName && (
                 <span className="text-red-500 font-medium flex items-center">
-                  <IoAlertOutline size={20} /> {errors.username}
+                  <IoAlertOutline size={20} /> {errors.displayName}
                 </span>
               )}
             </div>
 
             <div className="flex flex-col">
               <FormInput
+                type="email"
                 labelText="Email"
                 name="email"
                 value={email}
@@ -105,6 +123,7 @@ const RegisterPage = () => {
 
             <div className="flex flex-col">
               <FormInput
+                type="password"
                 labelText="Password"
                 name="password"
                 value={password}
@@ -119,6 +138,7 @@ const RegisterPage = () => {
 
             <div className="flex flex-col">
               <FormInput
+                type="password"
                 labelText="Confirm Password"
                 name="confirmPassword"
                 value={confirmPassword}
@@ -130,6 +150,13 @@ const RegisterPage = () => {
                 </span>
               )}
             </div>
+          </div>
+
+          <div className="flex items-center gap-6 px-6 text-sm font-medium -mt-6">
+            <p className="text-gray-500">Already have account?</p>
+            <Link href="/auth/login" className="text-blue-600">
+              Login
+            </Link>
           </div>
 
           <div className="flex items-center justify-center gap-4 my-4 px-6">
