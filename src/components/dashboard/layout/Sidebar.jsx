@@ -17,6 +17,7 @@ import {
   IoHome,
   IoHomeOutline,
   IoPencilOutline,
+  IoStopwatchOutline,
 } from "react-icons/io5";
 
 const links = [
@@ -50,6 +51,11 @@ const links = [
     url: "/dashboard/tasks",
   },
   {
+    icon: <IoStopwatchOutline className="w-5 h-5 text-gray-600" />,
+    text: "Habits",
+    url: "/dashboard/habits",
+  },
+  {
     icon: <IoPencilOutline className="w-5 h-5 text-gray-600" />,
     text: "Notes",
     url: "/dashboard/notes",
@@ -69,7 +75,7 @@ const Sidebar = () => {
   return (
     <div
       className={`${
-        isSidebarOpen ? "w-64" : "w-[72px]"
+        isSidebarOpen ? "w-64" : "w-[68px]"
       } h-screen transition-all duration-300 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] overflow-hidden`}
     >
       <nav className="items-center block w-auto overflow-hidden grow basis-full">
