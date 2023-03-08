@@ -11,6 +11,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -28,6 +29,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Initialize & export Firestore
+export const db = getFirestore(app);
+
 // ------------------------------------------------------------------------------
 // Auth
 const googleAuthProvider = new GoogleAuthProvider();
@@ -42,7 +46,6 @@ export const signInWithGooglePopup = () => {
 
 // ------------------------------------------------------------------------------
 // Save User
-export const db = getFirestore();
 
 export const createUserDocumentFromAuth = async (
   userAuth,
@@ -83,4 +86,39 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
   return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutUser = async () => await signOut(auth);
+
+export { doc, getDoc, setDoc };
+
+// Update a document by ID
+const updateDocument = async (collectionName, id, data) => {
+  await updateDoc(doc(db, collectionName, id), data);
+};
+
+// Delete a document by ID
+const deleteDocument = async (collectionName, id) => {
+  await deleteDoc(doc(db, collectionName, id));
+  fetchTasks();
+};
+
+const fetchTasks = async () => {
+  const querySnapshot = await getDocs(collection(db, "tasks"));
+  const documents = [];
+  querySnapshot.forEach((doc) => {
+    documents.push({ id: doc.id, ...doc.data() });
+  });
+  setTasks(documents);
+};
+
+const addTodo = async () => {
+  await addDoc(collection(db, "tasks"), {
+    taskName: taskName,
+    userId: currentUser?.uid || null,
+    completed: false,
+    important: false,
+  });
+  setTaskName("");
+  fetchTasks();
 };

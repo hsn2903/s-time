@@ -8,6 +8,8 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { IoAlertOutline, IoLogoGoogle } from "react-icons/io5";
+import { useRouter } from "next/router";
+import { useUserContext } from "@/contexts/userContext";
 
 const initialFormFields = {
   email: "",
@@ -18,6 +20,10 @@ const LoginPage = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
   const { email, password } = formFields;
   const [errors, setErrors] = useState({});
+
+  const { setCurrentUser } = useUserContext();
+
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,8 +37,11 @@ const LoginPage = () => {
   const signInWithGoogle = async () => {
     // log user in
     const { user } = await signInWithGooglePopup();
+
+    setCurrentUser(user);
     // save user
     await createUserDocumentFromAuth(user);
+    router.push("/");
   };
 
   const validate = () => {
@@ -62,12 +71,15 @@ const LoginPage = () => {
       // Here you would typically make an API call to register the user
 
       try {
-        const response = await signInAuthUserWithEmailAndPassword(
+        const { user } = await signInAuthUserWithEmailAndPassword(
           email,
           password
         );
-        console.log(response);
+
         resetFormFields();
+        setCurrentUser(user);
+
+        router.push("/");
       } catch (error) {
         switch (error.code) {
           case "auth/wrong-password":

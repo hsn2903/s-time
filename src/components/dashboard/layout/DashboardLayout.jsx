@@ -4,11 +4,11 @@ import Sidebar from "./Sidebar";
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="w-full">
-        <Navbar />
-        <div>{children}</div>
+    <div className=" ">
+      <Navbar />
+      <main className="flex w-full">
+        <Sidebar />
+        <div className="w-full">{children}</div>
       </main>
     </div>
   );

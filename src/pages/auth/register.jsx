@@ -1,9 +1,11 @@
 import FormInput from "@/components/ui/inputs/FormInput";
+import { useUserContext } from "@/contexts/userContext";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "@/utils/firebase";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { IoAlertOutline } from "react-icons/io5";
 
@@ -18,6 +20,10 @@ const RegisterPage = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
   const [errors, setErrors] = useState({});
+
+  const { setCurrentUser } = useUserContext();
+
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,6 +78,8 @@ const RegisterPage = () => {
 
         await createUserDocumentFromAuth(user, { displayName });
         resetFormFields();
+        setCurrentUser(user);
+        router.push("/");
       } catch (error) {
         if (error.code === "auth/email-already-in-use") {
           alert("Cannot create user. Email already exist");

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaPlay, FaPause, FaUndo } from "react-icons/fa";
 
-const PomodoroTimer = () => {
+const HorizantalTimer = () => {
   const [seconds, setSeconds] = useState(1500); // 1500 seconds = 25 minutes
   const [isActive, setIsActive] = useState(false);
 
@@ -33,26 +33,26 @@ const PomodoroTimer = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 items-center justify-center">
+    <div className="flex gap-4 items-center justify-center">
       <div
-        className={`w-full shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] flex flex-col items-center justify-center rounded-md py-12`}
+        className={`shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] flex items-center justify-center gap-4 rounded-md p-4`}
       >
-        <h1 className="text-4xl font-bold mb-4">{formatTime(seconds)}</h1>
+        <h1 className="text-4xl font-bold font-mono">{formatTime(seconds)}</h1>
 
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 text-sm">
           <button
-            className="bg-green-500 text-white rounded-lg px-4 py-2 flex items-center justify-center"
+            className="bg-green-500 text-white rounded-md px-4 py-2 flex items-center justify-center"
             onClick={toggle}
           >
             {isActive ? <FaPause /> : <FaPlay />}
-            <span className="ml-2">{isActive ? "Pause" : "Start"}</span>
+            {/* <span className="ml-2">{isActive ? "Pause" : "Start"}</span> */}
           </button>
           <button
             className="bg-red-500 text-white rounded-lg px-4 py-2 flex items-center justify-center"
             onClick={reset}
           >
             <FaUndo />
-            <span className="ml-2">Reset</span>
+            {/* <span className="ml-2">Reset</span> */}
           </button>
         </div>
       </div>
@@ -60,4 +60,4 @@ const PomodoroTimer = () => {
   );
 };
 
-export default PomodoroTimer;
+export default HorizantalTimer;

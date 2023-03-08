@@ -1,3 +1,5 @@
+import { useUserContext } from "@/contexts/userContext";
+import { signOutUser } from "@/utils/firebase";
 import Link from "next/link";
 import React, { useState } from "react";
 import { IoCloseOutline, IoMenuOutline } from "react-icons/io5";
@@ -11,6 +13,13 @@ const links = [
 
 const MainNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { currentUser, setCurrentUser } = useUserContext();
+
+  const signOutHandler = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
 
   return (
     <div className="shadow-md relative">
@@ -44,11 +53,20 @@ const MainNavbar = () => {
                 Timer
               </Link>
             </li>
-            <li>
-              <Link href="/auth/login" className="font-medium text-gray-700">
-                Login
-              </Link>
-            </li>
+
+            {currentUser ? (
+              <li>
+                <Link href="/dashboard" className="font-medium text-gray-700">
+                  Dashboard
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link href="/auth/login" className="font-medium text-gray-700">
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>
