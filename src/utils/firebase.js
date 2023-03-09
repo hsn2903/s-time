@@ -119,6 +119,4 @@ const addTodo = async () => {
     completed: false,
     important: false,
   });
-  setTaskName("");
-  fetchTasks();
 };

@@ -1,65 +1,46 @@
-import {
-  FaCalendarCheck,
-  FaListUl,
-  FaClock,
-  FaRegChartBar,
-} from "react-icons/fa";
+import { FaClock, FaCalendarCheck, FaListAlt } from "react-icons/fa";
 
 const FeaturesSection = () => {
   return (
-    <section className="bg-gray-100 py-20">
-      <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold">Features</h2>
-          <p className="text-gray-500">
-            Discover the benefits of using our time management and productivity
-            app
-          </p>
-        </div>
-        <div className="flex flex-wrap justify-center">
-          <div className="w-full md:w-1/2 lg:w-1/4 p-4">
-            <div className="bg-white rounded-lg shadow-lg px-6 py-8 text-center">
-              <FaCalendarCheck className="text-blue-500 text-4xl mb-4" />
-              <h3 className="text-xl font-bold mb-2">Calendar View</h3>
-              <p className="text-gray-600">
-                View your tasks and events in a monthly, weekly or daily
-                calendar view.
-              </p>
+    <div className="bg-gray-100 py-24">
+      <div className="w-[95vw] md:w-[90vw] mx-auto">
+        <h2 className="font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-12 text-center">
+          Key Features
+        </h2>
+        <div className="flex flex-col md:flex-row justify-center gap-8">
+          <div className="flex-1 bg-white rounded-lg p-8">
+            <div className="flex items-center mb-4">
+              <FaClock className="mr-4" size={40} color="#1A237E" />
+              <h3 className="font-bold text-2xl">Track Your Habits</h3>
             </div>
+            <p className="text-lg">
+              Easily track your habits and monitor your progress over time with
+              our user-friendly habit tracker.
+            </p>
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/4 p-4">
-            <div className="bg-white rounded-lg shadow-lg px-6 py-8 text-center">
-              <FaListUl className="text-blue-500 text-4xl mb-4" />
-              <h3 className="text-xl font-bold mb-2">Task Lists</h3>
-              <p className="text-gray-600">
-                Create task lists and organize them by priority, due date or
-                project.
-              </p>
+          <div className="flex-1 bg-white rounded-lg p-8">
+            <div className="flex items-center mb-4">
+              <FaCalendarCheck className="mr-4" size={40} color="#1A237E" />
+              <h3 className="font-bold text-2xl">Set Reminders</h3>
             </div>
+            <p className="text-lg">
+              Set reminders and notifications to help you stay on track with
+              your habits and achieve your goals.
+            </p>
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/4 p-4">
-            <div className="bg-white rounded-lg shadow-lg px-6 py-8 text-center">
-              <FaClock className="text-blue-500 text-4xl mb-4" />
-              <h3 className="text-xl font-bold mb-2">Time Tracking</h3>
-              <p className="text-gray-600">
-                Track the time spent on tasks and analyze your productivity with
-                reports.
-              </p>
+          <div className="flex-1 bg-white rounded-lg p-8">
+            <div className="flex items-center mb-4">
+              <FaListAlt className="mr-4" size={40} color="#1A237E" />
+              <h3 className="font-bold text-2xl">Customize Your Habits</h3>
             </div>
-          </div>
-          <div className="w-full md:w-1/2 lg:w-1/4 p-4">
-            <div className="bg-white rounded-lg shadow-lg px-6 py-8 text-center">
-              <FaRegChartBar className="text-blue-500 text-4xl mb-4" />
-              <h3 className="text-xl font-bold mb-2">Statistics</h3>
-              <p className="text-gray-600">
-                Get detailed statistics and insights on your performance and
-                progress over time.
-              </p>
-            </div>
+            <p className="text-lg">
+              Customize your habits to fit your unique needs and goals. Choose
+              from our pre-defined habits or create your own.
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

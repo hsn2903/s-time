@@ -1,70 +1,64 @@
-import {
-  FaSignInAlt,
-  FaListAlt,
-  FaCalendarAlt,
-  FaCheckCircle,
-} from "react-icons/fa";
+import Image from "next/image";
+import { FaClock, FaCalendarCheck, FaListAlt } from "react-icons/fa";
 
-const HowItWorksSection = () => {
+const HowItWorkSection = () => {
   return (
-    <section className="bg-white py-20">
-      <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-gray-900">How It Works</h2>
-          <p className="text-gray-600">
-            Discover how easy it is to use our time management and productivity
-            app
-          </p>
-        </div>
-        <div className="flex flex-wrap justify-center">
-          <div className="w-full md:w-1/2 lg:w-1/4 p-4">
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full h-16 w-16 flex items-center justify-center text-white mb-4 shadow-md">
-              <FaSignInAlt className="text-3xl" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Sign Up</h3>
-            <p className="text-gray-600">
-              Create your account and sign up for our app.
-            </p>
+    <div className="bg-gray-100 py-20">
+      <div className="w-[95vw] md:w-[90vw] mx-auto">
+        <h2 className="font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-12 text-center">
+          How It Works
+        </h2>
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="md:w-1/2 flex justify-center ">
+            <Image
+              src="images/how-it-works.svg"
+              alt="how it works"
+              width={400}
+              height={400}
+            />
           </div>
-          <div className="w-full md:w-1/2 lg:w-1/4 p-4">
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full h-16 w-16 flex items-center justify-center text-white mb-4 shadow-md">
-              <FaListAlt className="text-3xl" />
+          <div className="md:w-1/2 flex flex-col gap-4 justify-center">
+            <div className="flex mb-4">
+              <FaClock className="text-4xl text-indigo-900 mr-4" />
+              <div>
+                <h3 className="font-bold text-xl lg:text-2xl mb-2">
+                  Save Time
+                </h3>
+                <p className="text-gray-800">
+                  With s-time, you can easily track your time and manage your
+                  tasks in one place, so you can focus on what matters most.
+                </p>
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Create Task Lists
-            </h3>
-            <p className="text-gray-600">
-              Create your task lists and organize them by project or priority.
-            </p>
-          </div>
-          <div className="w-full md:w-1/2 lg:w-1/4 p-4">
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full h-16 w-16 flex items-center justify-center text-white mb-4 shadow-md">
-              <FaCalendarAlt className="text-3xl" />
+            <div className="flex mb-4">
+              <FaCalendarCheck className="text-4xl text-indigo-900 mr-4" />
+              <div>
+                <h3 className="font-bold text-xl lg:text-2xl mb-2">
+                  Stay Organized
+                </h3>
+                <p className="text-gray-800">
+                  Keep all of your deadlines, appointments, and events in one
+                  place with s-time&apos;s easy-to-use calendar feature.
+                </p>
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Schedule Tasks
-            </h3>
-            <p className="text-gray-600">
-              Schedule your tasks and events in a monthly, weekly or daily
-              calendar view.
-            </p>
-          </div>
-          <div className="w-full md:w-1/2 lg:w-1/4 p-4">
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full h-16 w-16 flex items-center justify-center text-white mb-4 shadow-md">
-              <FaCheckCircle className="text-3xl" />
+            <div className="flex mb-4">
+              <FaListAlt className="text-4xl text-indigo-900 mr-4" />
+              <div>
+                <h3 className="font-bold text-xl lg:text-2xl mb-2">
+                  Stay On Task
+                </h3>
+                <p className="text-gray-800">
+                  Create to-do lists and set reminders to help you stay on track
+                  and complete your tasks on time.
+                </p>
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Get Things Done
-            </h3>
-            <p className="text-gray-600">
-              Track your progress and productivity to get things done on time
-              and achieve your goals.
-            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default HowItWorksSection;
+export default HowItWorkSection;

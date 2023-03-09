@@ -13,10 +13,15 @@ import {
 import {
   IoCalendarOutline,
   IoChevronDownOutline,
+  IoExitOutline,
   IoFileTrayFullOutline,
   IoHome,
   IoHomeOutline,
   IoPencilOutline,
+  IoPeopleOutline,
+  IoPulseOutline,
+  IoSpeedometer,
+  IoSpeedometerOutline,
   IoStopwatchOutline,
 } from "react-icons/io5";
 
@@ -60,6 +65,16 @@ const links = [
     text: "Notes",
     url: "/dashboard/notes",
   },
+  {
+    icon: <IoSpeedometerOutline className="w-5 h-5 text-gray-600" />,
+    text: "Statistics",
+    url: "/dashboard/statistics",
+  },
+  {
+    icon: <IoPeopleOutline className="w-5 h-5 text-gray-600" />,
+    text: "Study Partners",
+    url: "/dashboard/study-partner",
+  },
 ];
 
 const Sidebar = () => {
@@ -94,20 +109,32 @@ const Sidebar = () => {
                   <div className="mr-2 flex h-8 w-8 items-center justify-center text-center p-1.5">
                     {icon}
                   </div>
-                  <span
-                    className={`ml-1 text-sm ${
-                      router.asPath === url
-                        ? "text-gray-600 font-medium"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    {text}
-                  </span>
+                  {isSidebarOpen && (
+                    <span
+                      className={`ml-1 text-sm ${
+                        router.asPath === url
+                          ? "text-gray-600 font-medium"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {text}
+                    </span>
+                  )}
                 </Link>
               </li>
             );
           })}
         </ul>
+
+        <button
+          className="flex items-center px-4 py-1 my-1 mx-2 transition-all"
+          onClick={() => console.log("Sign Out")}
+        >
+          <div className="mr-2 flex h-8 w-8 items-center justify-center text-center p-1.5">
+            <IoExitOutline className="w-5 h-5 text-gray-600" />
+          </div>
+          {isSidebarOpen && <span className="text-sm"> Sign Out</span>}
+        </button>
       </nav>
     </div>
   );

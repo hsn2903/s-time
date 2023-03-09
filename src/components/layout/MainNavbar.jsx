@@ -23,7 +23,7 @@ const MainNavbar = () => {
 
   return (
     <div className="shadow-md relative">
-      <div className="h-20 flex items-center justify-between container mx-auto">
+      <div className="h-20 flex items-center justify-between w-[95vw] md:w-[90vw] mx-auto">
         {/* nav header */}
         <div className="flex items-center justify-between h-full w-full">
           <Link href="/">

@@ -4,7 +4,7 @@ import { FaClock, FaCalendarCheck, FaListAlt } from "react-icons/fa";
 const HeroSection = () => {
   return (
     <div className="">
-      <div className="w-[90vw] mx-auto py-20 ">
+      <div className="w-[95vw] md:w-[90vw] mx-auto py-20 ">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="md:w-1/2">
             <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-6 ">
