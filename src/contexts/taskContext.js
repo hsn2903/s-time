@@ -14,6 +14,7 @@ const TaskContext = createContext();
 
 const TaskProvider = ({ children }) => {
   const [tasksList, setTasksList] = useState([]);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const fetchAllTasks = async () => {
     const querySnapshot = await getDocs(collection(db, "tasks"));
@@ -67,13 +68,35 @@ const TaskProvider = ({ children }) => {
     }
   };
 
+  const increaseCompletedPomodoro = async (id) => {
+    if (selectedTask) {
+      const newValue = selectedTask.completedPomodoro + 1;
+      try {
+        const todoRef = doc(db, "tasks", selectedTask.id);
+        await setDoc(todoRef, { completedPomodoro: newValue }, { merge: true });
+        fetchAllTasks();
+      } catch (e) {
+        console.error("Error toggle completed: ", e);
+      }
+    }
+  };
+
   useEffect(() => {
     fetchAllTasks();
   }, []);
 
   return (
     <TaskContext.Provider
-      value={{ createTask, updateTask, deleteTask, tasksList, toggleComplete }}
+      value={{
+        selectedTask,
+        setSelectedTask,
+        createTask,
+        updateTask,
+        deleteTask,
+        tasksList,
+        toggleComplete,
+        increaseCompletedPomodoro,
+      }}
     >
       {children}
     </TaskContext.Provider>

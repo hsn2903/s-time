@@ -1,9 +1,12 @@
+import { useTaskContext } from "@/contexts/taskContext";
 import React, { useState, useEffect } from "react";
 import { FaPlay, FaPause, FaUndo } from "react-icons/fa";
 
 const PomodoroTimer = () => {
   const [seconds, setSeconds] = useState(1500); // 1500 seconds = 25 minutes
   const [isActive, setIsActive] = useState(false);
+
+  const { increaseCompletedPomodoro } = useTaskContext();
 
   useEffect(() => {
     let interval = null;
@@ -13,6 +16,13 @@ const PomodoroTimer = () => {
       }, 1000);
     } else if (!isActive && seconds !== 0) {
       clearInterval(interval);
+    }
+
+    if (seconds === 0) {
+      increaseCompletedPomodoro();
+      setIsActive(false);
+      const audio = new Audio("/audios/finish.mp3");
+      audio.play();
     }
     return () => clearInterval(interval);
   }, [isActive, seconds]);
