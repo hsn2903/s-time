@@ -17,7 +17,7 @@ const DashboardMain = () => {
   return (
     <DashboardLayout>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-        <WelcomeSection />
+        <WelcomeSection username={currentUser?.displayName || ""} />
 
         <Card className="p-4">
           <Quote />

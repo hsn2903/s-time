@@ -1,4 +1,5 @@
 import { AppProvider } from "@/contexts/appContext";
+import { TaskProvider } from "@/contexts/taskContext";
 import { UserProvider } from "@/contexts/userContext";
 import "@/styles/globals.css";
 import { Poppins } from "next/font/google";
@@ -14,7 +15,9 @@ export default function MyApp({ Component, pageProps }) {
     <main className={poppins.className}>
       <UserProvider>
         <AppProvider>
-          <Component {...pageProps} />
+          <TaskProvider>
+            <Component {...pageProps} />
+          </TaskProvider>
         </AppProvider>
       </UserProvider>
     </main>

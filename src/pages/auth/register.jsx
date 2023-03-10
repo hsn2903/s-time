@@ -21,8 +21,6 @@ const RegisterPage = () => {
   const { displayName, email, password, confirmPassword } = formFields;
   const [errors, setErrors] = useState({});
 
-  const { setCurrentUser } = useUserContext();
-
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -78,8 +76,8 @@ const RegisterPage = () => {
 
         await createUserDocumentFromAuth(user, { displayName });
         resetFormFields();
-        setCurrentUser(user);
-        router.push("/");
+
+        router.push("/dashboard");
       } catch (error) {
         if (error.code === "auth/email-already-in-use") {
           alert("Cannot create user. Email already exist");

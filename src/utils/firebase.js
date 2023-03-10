@@ -12,6 +12,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -90,33 +91,5 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-export { doc, getDoc, setDoc };
-
-// Update a document by ID
-const updateDocument = async (collectionName, id, data) => {
-  await updateDoc(doc(db, collectionName, id), data);
-};
-
-// Delete a document by ID
-const deleteDocument = async (collectionName, id) => {
-  await deleteDoc(doc(db, collectionName, id));
-  fetchTasks();
-};
-
-const fetchTasks = async () => {
-  const querySnapshot = await getDocs(collection(db, "tasks"));
-  const documents = [];
-  querySnapshot.forEach((doc) => {
-    documents.push({ id: doc.id, ...doc.data() });
-  });
-  setTasks(documents);
-};
-
-const addTodo = async () => {
-  await addDoc(collection(db, "tasks"), {
-    taskName: taskName,
-    userId: currentUser?.uid || null,
-    completed: false,
-    important: false,
-  });
-};
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);

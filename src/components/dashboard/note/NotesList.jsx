@@ -20,9 +20,6 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
 
   return (
     <div className="mt-6">
-      {notes.map((note) => (
-        <Note key={note.id} note={note} handleDeleteNote={handleDeleteNote} />
-      ))}
       <form onSubmit={handleSubmit} className="mt-4 flex">
         <input
           type="text"
@@ -38,6 +35,12 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
           <FaPlusCircle />
         </button>
       </form>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 py-6">
+        {notes.map((note) => (
+          <Note key={note.id} note={note} handleDeleteNote={handleDeleteNote} />
+        ))}
+      </div>
     </div>
   );
 };

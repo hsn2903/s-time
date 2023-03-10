@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 
 import { db } from "@/utils/firebase";
-import TaskItem from "./TaskItem";
+import TaskItem from "../dashboard/task/TaskItem";
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);

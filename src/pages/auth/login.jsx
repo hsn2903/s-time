@@ -21,8 +21,6 @@ const LoginPage = () => {
   const { email, password } = formFields;
   const [errors, setErrors] = useState({});
 
-  const { setCurrentUser } = useUserContext();
-
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -37,11 +35,7 @@ const LoginPage = () => {
   const signInWithGoogle = async () => {
     // log user in
     const { user } = await signInWithGooglePopup();
-
-    setCurrentUser(user);
-    // save user
-    await createUserDocumentFromAuth(user);
-    router.push("/");
+    router.push("/dashboard");
   };
 
   const validate = () => {
@@ -77,9 +71,8 @@ const LoginPage = () => {
         );
 
         resetFormFields();
-        setCurrentUser(user);
 
-        router.push("/");
+        router.push("/dashboard");
       } catch (error) {
         switch (error.code) {
           case "auth/wrong-password":

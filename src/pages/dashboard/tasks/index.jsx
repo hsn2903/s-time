@@ -7,11 +7,11 @@ import TestTodo from "@/components/todo/TestTodo";
 const TasksPage = () => {
   return (
     <DashboardLayout>
-      <div className="py-12 w-[95%] mx-auto flex gap-6">
-        <div className="w-1/2">
+      <div className="py-12 w-[95%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="">
           <TestTodo />
         </div>
-        <div className="w-1/2 flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
           <PomodoroTimer />
 
           <div className="w-full">
