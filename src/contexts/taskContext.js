@@ -5,10 +5,14 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  onSnapshot,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import { useContext, createContext, useState, useEffect } from "react";
+import { useUserContext } from "./userContext";
 
 const TaskContext = createContext();
 
@@ -16,14 +20,16 @@ const TaskProvider = ({ children }) => {
   const [tasksList, setTasksList] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
 
-  const fetchAllTasks = async () => {
-    const querySnapshot = await getDocs(collection(db, "tasks"));
-    const tasksData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    setTasksList(tasksData);
-  };
+  const { currentUser } = useUserContext();
+
+  // const fetchAllTasks = async () => {
+  //   const querySnapshot = await getDocs(collection(db, "tasks"));
+  //   const tasksData = querySnapshot.docs.map((doc) => ({
+  //     id: doc.id,
+  //     ...doc.data(),
+  //   }));
+  //   setTasksList(tasksData);
+  // };
 
   const createTask = async (task) => {
     try {
@@ -82,8 +88,28 @@ const TaskProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const fetchAllTasks = async () => {
+      if (currentUser) {
+        const q = query(
+          collection(db, "tasks"),
+          where("userId", "==", currentUser?.uid)
+        );
+
+        // Listen for realtime updates to the user's tasks
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const tasks = [];
+          querySnapshot.forEach((doc) => {
+            tasks.push({ id: doc.id, ...doc.data() });
+          });
+          setTasksList(tasks);
+        });
+
+        // Unsubscribe from realtime updates when the component unmounts
+        return () => unsubscribe();
+      }
+    };
     fetchAllTasks();
-  }, []);
+  }, [currentUser]);
 
   return (
     <TaskContext.Provider

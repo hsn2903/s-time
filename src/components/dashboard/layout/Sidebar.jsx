@@ -2,14 +2,7 @@ import { useAppContext } from "@/contexts/appContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import {
-  FaHome,
-  FaCalendarAlt,
-  FaListUl,
-  FaUserAlt,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
+import { signOutUser } from "@/utils/firebase";
 import {
   IoCalendarOutline,
   IoChevronDownOutline,
@@ -78,13 +71,13 @@ const links = [
 ];
 
 const Sidebar = () => {
-  const [tasksOpen, setTasksOpen] = useState(false);
   const router = useRouter();
 
   const { isSidebarOpen, setIsSidebarOpen } = useAppContext();
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const handleSignOut = () => {
+    signOutUser();
+    router.push("/");
   };
 
   return (
@@ -128,7 +121,7 @@ const Sidebar = () => {
 
         <button
           className="flex items-center px-4 py-1 my-1 mx-2 transition-all"
-          onClick={() => console.log("Sign Out")}
+          onClick={handleSignOut}
         >
           <div className="mr-2 flex h-8 w-8 items-center justify-center text-center p-1.5">
             <IoExitOutline className="w-5 h-5 text-gray-600" />
