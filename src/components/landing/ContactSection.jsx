@@ -2,15 +2,17 @@ import { FaEnvelope, FaPhone, FaMapMarker } from "react-icons/fa";
 
 const ContactUs = () => {
   return (
-    <div className="bg-gray-100">
+    <div className="w-[95%] md:w-[90%] mx-auto bg-gray-100 border-t border-gray-300 py-24">
       <div className="container mx-auto py-12 px-4">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Contact Us</h2>
-        <div className="flex flex-wrap -mx-4">
+        <div className="flex items-center flex-wrap -mx-4">
           <div className="w-full md:w-1/2 px-4">
+            <h2 className="text-3xl font-bold text-gray-800 mb-6">
+              Contact Us
+            </h2>
             <h3 className="text-xl font-semibold text-gray-700 mb-4">
               Get in Touch
             </h3>
-            <p className="text-gray-600 leading-loose mb-4">
+            <p className="text-gray-600 leading-loose mb-4 text-lg">
               If you have any questions, feedback, or suggestions, please
               don&apos;t hesitate to get in touch with us.
             </p>
@@ -71,7 +73,7 @@ const ContactUs = () => {
               </div>
               <button
                 type="submit"
-                className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                className="bg-primary text-white py-2 px-4 rounded-lg hover:opacity-80 transition-colors duration-300"
               >
                 Send
               </button>

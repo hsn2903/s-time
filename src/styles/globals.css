@@ -10,9 +10,17 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-gray-100;
   color: #333;
+}
+
+.wrapper {
+  @apply w-[95%] md:w-[90%] mx-auto;
 }
 
 .gradient-1 {

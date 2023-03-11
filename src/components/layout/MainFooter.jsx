@@ -2,8 +2,8 @@ import React from "react";
 
 const MainFooter = () => {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto py-8">
+    <footer className="bg-gray-900 text-white ">
+      <div className="w-[95%] md:w-[90%] mx-auto py-12">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <h3 className="text-2xl font-bold">s-time</h3>

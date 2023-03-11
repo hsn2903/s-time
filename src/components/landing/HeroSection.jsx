@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FaClock, FaCalendarCheck, FaListAlt } from "react-icons/fa";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -9,23 +9,26 @@ const HeroSection = () => {
           <div className="md:w-1/2">
             <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-6 ">
               Get More Done in Less Time with{" "}
-              <span className="inline-block text-indigo-900 ">s-time</span>
+              <span className="inline-block text-green-500 ">s-time</span>
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium mb-8">
               The ultimate tool for busy professionals and students
             </p>
-            <a
-              href="#"
-              className="bg-zinc-900 text-white hover:bg-zinc-700 font-medium py-3 px-8 rounded-full mr-4 mb-4 md:mb-0"
-            >
-              Start Using Now
-            </a>
-            <a
-              href="#"
-              className="font-medium text-gray-900 hover:text-gray-600 py-3 px-8 rounded-full"
-            >
-              Learn More
-            </a>
+            <div className="flex items-center">
+              <Link
+                href="/auth/login"
+                className="bg-green-500 hover:opacity-80 text-white font-medium py-3 px-8 rounded-full mr-4 mb-4 md:mb-0 shadow-md"
+              >
+                Start Using Now
+              </Link>
+              <a
+                href="#how"
+                className="font-medium text-gray-900 hover:text-gray-600 py-3 px-8 rounded-full group flex gap-1 hover:gap-3 transition-all"
+              >
+                <span>Learn More</span>
+                <span className="">&rarr;</span>
+              </a>
+            </div>
           </div>
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <Image

@@ -1,46 +1,72 @@
-import { FaClock, FaCalendarCheck, FaListAlt } from "react-icons/fa";
+import { FaCheckCircle, FaCalendarAlt, FaChartLine } from "react-icons/fa";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { MdFormatListBulleted } from "react-icons/md";
+import { AiOutlineThunderbolt } from "react-icons/ai";
 
 const FeaturesSection = () => {
   return (
-    <div className="bg-gray-100 py-24">
-      <div className="w-[95vw] md:w-[90vw] mx-auto">
-        <h2 className="font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-12 text-center">
-          Key Features
-        </h2>
-        <div className="flex flex-col md:flex-row justify-center gap-8">
-          <div className="flex-1 bg-white rounded-lg p-8">
-            <div className="flex items-center mb-4">
-              <FaClock className="mr-4" size={40} color="#1A237E" />
-              <h3 className="font-bold text-2xl">Track Your Habits</h3>
+    <section className="bg-gray-100 py-20">
+      <div className="wrapper">
+        <h2 className="text-4xl font-bold mb-12 text-center">Features</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="flex items-center">
+            <FaCheckCircle className="text-green-500 text-5xl mr-5" />
+            <div>
+              <h3 className="font-bold text-xl mb-3">Track Your Habits</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Keep track of your habits and monitor your progress over time.
+              </p>
             </div>
-            <p className="text-lg">
-              Easily track your habits and monitor your progress over time with
-              our user-friendly habit tracker.
-            </p>
           </div>
-          <div className="flex-1 bg-white rounded-lg p-8">
-            <div className="flex items-center mb-4">
-              <FaCalendarCheck className="mr-4" size={40} color="#1A237E" />
-              <h3 className="font-bold text-2xl">Set Reminders</h3>
+          <div className="flex items-center">
+            <MdFormatListBulleted className="text-green-500 text-5xl mr-5" />
+            <div>
+              <h3 className="font-bold text-xl mb-3">Customizable Lists</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Create your own custom lists and add your own habits to them.
+              </p>
             </div>
-            <p className="text-lg">
-              Set reminders and notifications to help you stay on track with
-              your habits and achieve your goals.
-            </p>
           </div>
-          <div className="flex-1 bg-white rounded-lg p-8">
-            <div className="flex items-center mb-4">
-              <FaListAlt className="mr-4" size={40} color="#1A237E" />
-              <h3 className="font-bold text-2xl">Customize Your Habits</h3>
+          <div className="flex items-center">
+            <IoNotificationsOutline className="text-green-500 text-5xl mr-5" />
+            <div>
+              <h3 className="font-bold text-xl mb-3">Notifications</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Set reminders and get notifications to help you stay on track.
+              </p>
             </div>
-            <p className="text-lg">
-              Customize your habits to fit your unique needs and goals. Choose
-              from our pre-defined habits or create your own.
-            </p>
+          </div>
+          <div className="flex items-center">
+            <AiOutlineThunderbolt className="text-green-500 text-5xl mr-5" />
+            <div>
+              <h3 className="font-bold text-xl mb-3">Quick Add</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Quickly add habits with just a few clicks or taps.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <FaCalendarAlt className="text-green-500 text-5xl mr-5" />
+            <div>
+              <h3 className="font-bold text-xl mb-3">Calendar View</h3>
+              <p className="text-gray-600 leading-relaxed">
+                View your progress over time in a convenient calendar format.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <FaChartLine className="text-green-500 text-5xl mr-5" />
+            <div>
+              <h3 className="font-bold text-xl mb-3">Statistics</h3>
+              <p className="text-gray-600 leading-relaxed">
+                See detailed statistics and graphs to help you understand your
+                habits better.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

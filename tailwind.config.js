@@ -9,7 +9,12 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#4CAF50",
+        logo: "#009688",
+      },
+    },
     fontFamily: {
       mono: ["Roboto Mono"],
     },

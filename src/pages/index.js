@@ -8,6 +8,7 @@ import FeaturesSection from "@/components/landing/FeaturesSection";
 import HowItWorkSection from "@/components/landing/HowItWorkSection";
 import AboutSection from "@/components/landing/AboutSection";
 import ContactSection from "@/components/landing/ContactSection";
+import FAQSection from "@/components/landing/FAQSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function Home() {
         <HeroSection />
         <HowItWorkSection />
         <FeaturesSection />
-        <AboutSection />
+        <FAQSection />
         <ContactSection />
       </Layout>
     </>
