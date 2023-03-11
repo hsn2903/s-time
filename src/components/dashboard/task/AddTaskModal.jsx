@@ -18,8 +18,8 @@ const AddTaskModal = ({ openAddModal, setOpenAddModal }) => {
 
     const taskData = {
       taskName,
-      requiredPomodoro,
       taskDetail,
+      requiredPomodoro,
       completedPomodoro: 0,
       userId: currentUser.uid,
       completed: false,

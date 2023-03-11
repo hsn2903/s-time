@@ -19,7 +19,7 @@ const HowItWorkSection = () => {
           </div>
           <div className="md:w-1/2 flex flex-col gap-4 justify-center">
             <div className="flex mb-4">
-              <FaClock className="text-4xl text-indigo-900 mr-4" />
+              <FaClock className="text-5xl text-indigo-900 mr-4" />
               <div>
                 <h3 className="font-bold text-xl lg:text-2xl mb-2">
                   Save Time

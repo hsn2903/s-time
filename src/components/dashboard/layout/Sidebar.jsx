@@ -1,19 +1,12 @@
 import { useAppContext } from "@/contexts/appContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { signOutUser } from "@/utils/firebase";
 import {
-  IoCalendarOutline,
-  IoChevronDownOutline,
   IoExitOutline,
   IoFileTrayFullOutline,
-  IoHome,
-  IoHomeOutline,
   IoPencilOutline,
   IoPeopleOutline,
-  IoPulseOutline,
-  IoSpeedometer,
   IoSpeedometerOutline,
   IoStopwatchOutline,
 } from "react-icons/io5";
