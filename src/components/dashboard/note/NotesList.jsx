@@ -1,9 +1,17 @@
+import Card from "@/components/ui/Card";
+import { useNoteContext } from "@/contexts/noteContext";
+import moment from "moment/moment";
 import React from "react";
-import { FaPlusCircle } from "react-icons/fa";
-import Note from "./Note";
+import {
+  IoSearchCircleOutline,
+  IoTrashBinOutline,
+  IoTrashOutline,
+} from "react-icons/io5";
 
-const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
+const NotesList = ({ onSelectNote }) => {
   const [newNoteText, setNewNoteText] = React.useState("");
+  const { notesList, deleteNote, selectedNote, setSelectedNote } =
+    useNoteContext();
 
   const handleChange = (event) => {
     setNewNoteText(event.target.value);
@@ -11,10 +19,7 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAddNote({
-      id: Date.now(),
-      text: newNoteText,
-    });
+
     setNewNoteText("");
   };
 
@@ -23,7 +28,7 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
       <form onSubmit={handleSubmit} className="mt-4 flex">
         <input
           type="text"
-          placeholder="Add a new note"
+          placeholder="Search"
           value={newNoteText}
           onChange={handleChange}
           className="flex-1 p-2 rounded-md mr-2"
@@ -32,15 +37,32 @@ const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
           type="submit"
           className="bg-green-500 rounded-sm text-white px-4 py-2 transition hover:bg-green-600"
         >
-          <FaPlusCircle />
+          <IoSearchCircleOutline size={32} />
         </button>
       </form>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 py-6">
-        {notes.map((note) => (
-          <Note key={note.id} note={note} handleDeleteNote={handleDeleteNote} />
+      <Card className="flex flex-col gap-1 p-4">
+        {notesList.map((note) => (
+          <div
+            key={note.id}
+            className=" p-2 mb-2 rounded-md border-l-4 border-blue-300"
+            onClick={() => onSelectNote(note)}
+          >
+            <p className="text-sm text-end text-gray-500">
+              {moment(note.date).format("MMM Do YY")}
+            </p>
+            <p className="m-0 text-gray-600">{note.title}</p>
+            <div className="flex justify-end">
+              <button
+                className=" text-red-700 hover:text-red-800"
+                onClick={() => deleteNote(note.id)}
+              >
+                <IoTrashOutline size={12} />
+              </button>
+            </div>
+          </div>
         ))}
-      </div>
+      </Card>
     </div>
   );
 };

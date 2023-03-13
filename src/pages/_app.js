@@ -1,4 +1,5 @@
 import { AppProvider } from "@/contexts/appContext";
+import { NoteProvider } from "@/contexts/noteContext";
 import { TaskProvider } from "@/contexts/taskContext";
 import { UserProvider } from "@/contexts/userContext";
 import "@/styles/globals.css";
@@ -16,7 +17,9 @@ export default function MyApp({ Component, pageProps }) {
       <UserProvider>
         <AppProvider>
           <TaskProvider>
-            <Component {...pageProps} />
+            <NoteProvider>
+              <Component {...pageProps} />
+            </NoteProvider>
           </TaskProvider>
         </AppProvider>
       </UserProvider>
